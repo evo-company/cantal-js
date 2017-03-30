@@ -1,0 +1,6 @@
+containers:
+  js:
+    setup:
+    - !Alpine v3.5
+    - !Install [python, make]
+    - !YarnDependencies

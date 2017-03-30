@@ -1,0 +1,10 @@
+mixins:
+- js-npm.yaml
+- js-yarn.yaml  # overrides if yarn supported
+
+commands:
+  example: !Command
+    container: js
+    environ:
+      NODE_PATH: /usr/lib/node_modules
+    run: ["node", "./example.js"]
