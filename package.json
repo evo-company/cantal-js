@@ -1,9 +1,9 @@
 {
-  "name": "cantal",
+  "name": "@evo/cantal-js",
   "version": "0.1.0",
   "description": "A nodejs library for cantal",
   "keywords": ["cantal", "metrics", "monitoring"],
-  "homepage": "http://github.com/tailhook/cantal-js",
+  "homepage": "https://github.com/evo-company/cantal-js",
   "main": "index.js",
   "dependencies": {
     "mmap.js": "1.0.2",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tailhook/khufu.git"
+    "url": "https://github.com/evo-company/cantal-js"
   },
   "author": "Paul Colomiets <paul@colomiets.name>",
   "license": "(MIT OR Apache-2.0)"
