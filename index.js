@@ -1,6 +1,7 @@
 var fs = require('fs')
 var mmap = require('mmap.js')
 var Int64 = require('node-cint64').Int64
+var v8Metrics = require('./v8-stats');
 var active_metrics = []
 var buffer
 
@@ -63,6 +64,9 @@ function silentDelete(path) {
 function start() {
     let offset = 00
     let scheme = ""
+
+    v8Metrics.startV8Collect();    
+    
     for(var item of active_metrics) {
         offset += item.getSize();
         let typ = item.getType()
