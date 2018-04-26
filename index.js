@@ -1,55 +1,9 @@
 var fs = require('fs')
 var mmap = require('mmap.js')
-var Int64 = require('node-cint64').Int64
 var v8Metrics = require('./v8-stats');
-var active_metrics = []
+var metrics = require('./metrics');
 var buffer
 
-class Integer {
-    constructor(name) {
-        this.name = name
-        this.memory = null
-        active_metrics.push(this)
-    }
-    getSize() {
-        return 8;
-    }
-    getType() {
-        return "level 8 signed";
-    }
-    setMemory(buf) {
-        this.memory = buf
-    }
-    set(val) {
-        new Int64(val).intoBuffer(this.memory)
-    }
-    incr(val=1) {
-        new Int64(this.memory).add(val).intoBuffer(this.memory)
-    }
-    decr(val=1) {
-        new Int64(this.memory).sub(val).intoBuffer(this.memory)
-    }
-}
-
-class Counter {
-    constructor(name) {
-        this.name = name
-        this.memory = null
-        active_metrics.push(this)
-    }
-    getSize() {
-        return 8;
-    }
-    getType() {
-        return "counter 8";
-    }
-    setMemory(buf) {
-        this.memory = buf
-    }
-    incr(val=1) {
-        new Int64(this.memory).add(val).intoBuffer(this.memory)
-    }
-}
 
 function silentDelete(path) {
     try {
@@ -66,8 +20,8 @@ function start() {
     let scheme = ""
 
     v8Metrics.startV8Collect();    
-    
-    for(var item of active_metrics) {
+
+    for(var item of metrics.active_metrics) {
         offset += item.getSize();
         let typ = item.getType()
 
@@ -110,14 +64,14 @@ function start() {
     fs.renameSync(tmppath, metapath)
 
     offset = 0
-    for(var metric of active_metrics) {
+    for(var metric of metrics.active_metrics) {
         metric.setMemory(buffer.slice(offset, offset + metric.getSize()))
         offset += metric.getSize()
     }
 }
 
 module.exports = {
-    Integer: Integer,
-    Counter: Counter,
+    Integer: metrics.Integer,
+    Counter: metrics.Counter,
     start: start,
 }

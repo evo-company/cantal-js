@@ -1,33 +1,33 @@
-const v8 = require('v8');
-const cantal = require('./index');
+var v8 = require('v8');
+var metrics = require('./metrics');
 
 function startV8Collect() {
-    const newSpaceUsedSize = new cantal.Integer({
+    const newSpaceUsedSize = new metrics.Integer({
         group: "v8-stats",
         metric: "new_space_used_size"
     });
 
-    const oldSpaceUsedSize = new cantal.Integer({
+    const oldSpaceUsedSize = new metrics.Integer({
         group: "v8-stats",
         metric: "old_space_used_size"
     });
 
-    const codeSpaceUsedSize = new cantal.Integer({
+    const codeSpaceUsedSize = new metrics.Integer({
         group: "v8-stats",
         metric: "code_space_used_size"
     });
 
-    const mapSpaceUsedSize = new cantal.Integer({
+    const mapSpaceUsedSize = new metrics.Integer({
         group: "v8-stats",
         metric: "map_space_used_size"
     });
 
-    const largeObjectUsedSpaceSize = new cantal.Integer({
+    const largeObjectUsedSpaceSize = new metrics.Integer({
         group: "v8-stats",
         metric: "large_object_space_used_size"
     });
 
-    const mallocedMemory = new cantal.Integer({
+    const mallocedMemory = new metrics.Integer({
         group: "v8-stats",
         metric: "malloced_memory"
     });
