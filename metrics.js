@@ -17,12 +17,15 @@ class Integer {
         this.memory = buf
     }
     set(val) {
+        if (!this.memory) return;
         new Int64(val).intoBuffer(this.memory)
     }
     incr(val=1) {
+        if (!this.memory) return;
         new Int64(this.memory).add(val).intoBuffer(this.memory)
     }
     decr(val=1) {
+        if (!this.memory) return;
         new Int64(this.memory).sub(val).intoBuffer(this.memory)
     }
 }
@@ -43,6 +46,7 @@ class Counter {
         this.memory = buf
     }
     incr(val=1) {
+        if (!this.memory) return;
         new Int64(this.memory).add(val).intoBuffer(this.memory)
     }
 }
